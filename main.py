@@ -72,6 +72,42 @@ def main():
     print_readable_json(new_page_resp)
 
 
+    # children anhängen kann man in einer Methode wegabstrahieren
+    page_heading_2 = {
+        "children": [
+            {
+                "object": "block",
+                "type": "heading_2",
+                "heading_2": {
+                    "rich_text": [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": "This is created by API",
+                                "link": None
+                            },
+                            "annotations": {
+                                "bold": False,
+                                "italic": False,
+                                "strikethrough": False,
+                                "underline": False,
+                                "code": False,
+                                "color": "blue"
+                            },
+                            "plain_text": "This is created by API",
+                            "href": None
+                        }
+                    ],
+                    "color": "default",
+                    "is_toggleable": False
+                }
+            }
+        ]
+    }
+    new_header_resp = requests.patch(f"https://api.notion.com/v1/blocks/{page_id}/children", json=page_heading_2, headers=header)
+    print_readable_json(new_header_resp)
+
+
 def print_readable_json(json_object):
     print(json.dumps(json_object.json(), indent=2))
 
