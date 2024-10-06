@@ -1,2 +1,5 @@
 .env
 .vscode
+ToDo_Updater/Tests/__pycache__
+ToDo_Updater/Domain/__pycache__
+.pytest_cache
