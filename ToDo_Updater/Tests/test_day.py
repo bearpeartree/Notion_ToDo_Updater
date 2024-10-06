@@ -9,13 +9,13 @@ from Domain import Week as week
 
 
 def test_add_task():
-    monday = day.Day("Montag", 52)
+    monday = day.Day("Montag", 52, 2022)
     monday.add_task("Zimmer dekorieren")
     assert monday.get_tasks() == ["Zimmer dekorieren"]
 
 
 def test_add_noname_task():
-    new_week = week.Week(1, "Januar")
+    new_week = week.Week(1, "Januar", 2024)
     monday = new_week.get_day("Montag")
     with pytest.raises(ValueError):
         monday.add_task("")

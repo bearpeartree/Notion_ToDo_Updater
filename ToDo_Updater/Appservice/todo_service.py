@@ -5,5 +5,5 @@ class todo_service: # Will be used by API_Client
         self.todo_service = todo_service
 
     
-    def create_new_week(self, c_week, month):
-        return week.Week(c_week, month)
+    def create_new_week(self, c_week, month, year):
+        return week.Week(c_week, month, year)
