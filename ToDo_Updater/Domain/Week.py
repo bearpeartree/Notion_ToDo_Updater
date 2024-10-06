@@ -21,6 +21,7 @@ class Week:
         for i in self.days:
             if i.get_day() == day_name:
                 return i
+        raise ValueError("Der Tag existiert nicht.")
     
 
     def get_month(self):

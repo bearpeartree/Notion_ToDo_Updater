@@ -12,3 +12,21 @@ def test_get_correct_day():
     new_week = week.Week(46, "Dezember")
     the_day = new_week.get_day("Montag")
     assert the_day.get_day() == "Montag"
+
+
+def test_get_invalid_day():
+    new_week = week.Week(42, "Dezember")
+    with pytest.raises(ValueError):
+        new_week.get_day("Hello")
+
+
+def test_get_empty_day_name():
+    new_week = week.Week(42, "Dezember")
+    with pytest.raises(ValueError):
+        new_week.get_day("")
+
+
+def test_get_non_String_day():
+    new_week = week.Week(42, "Dezember")
+    with pytest.raises(ValueError):
+        new_week.get_day(6)
