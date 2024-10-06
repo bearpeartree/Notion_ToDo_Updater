@@ -30,3 +30,8 @@ def test_get_non_String_day():
     new_week = week.Week(42, "Dezember")
     with pytest.raises(ValueError):
         new_week.get_day(6)
+
+
+def test_construct_invalid_calendar_week():
+    with pytest.raises(ValueError):
+        week.Week(100, "Januar")

@@ -9,7 +9,10 @@ class Week:
                     Day("Freitag", calendar_week),
                     Day("Samstag", calendar_week),
                     Day("Sonntag", calendar_week)]
-        self.calendar_week = calendar_week
+        if calendar_week >= 1 and calendar_week <= 52:
+            self.calendar_week = calendar_week
+        else:
+            raise ValueError("Kalenderwoche darf nur von 1 bis 52 sein!")
         self.month = month
 
 
