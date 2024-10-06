@@ -1,4 +1,4 @@
-from . import Day
+from .Day import Day
 
 class Week:
     def __init__(self, calendar_week, month):
@@ -12,12 +12,16 @@ class Week:
         self.calendar_week = calendar_week
         self.month = month
 
+
     def get_calendar_week(self):
         return self.calendar_week
     
+
     def get_day(self, day_name):
-        index = self.days.index(day_name)
-        return self.days[index]
+        for i in self.days:
+            if i.get_day() == day_name:
+                return i
     
+
     def get_month(self):
         return self.month
