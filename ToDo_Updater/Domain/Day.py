@@ -1,4 +1,5 @@
 from datetime import date
+from . import Task
 
 class Day:
     def __init__(self, day, in_week_cal):
@@ -14,3 +15,6 @@ class Day:
     
     def get_tasks(self):
         return self.tasks
+    
+    def add_task(self, task):
+        self.tasks.append(task)
