@@ -6,6 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Domain import Day as day
 from Domain import Task as task
 from Domain import Week as week
+from Domain.Exceptions import IllegalCalendarWeek as ilw
 
 
 def test_get_correct_day():
@@ -33,5 +34,5 @@ def test_get_non_String_day():
 
 
 def test_construct_invalid_calendar_week():
-    with pytest.raises(ValueError):
+    with pytest.raises(ilw.IllegalCalendarWeekError):
         week.Week(100, "Januar", 2022)

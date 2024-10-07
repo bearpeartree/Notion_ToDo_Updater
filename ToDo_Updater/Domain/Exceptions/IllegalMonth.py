@@ -1,0 +1,2 @@
+class IllegalMonthError(ValueError):
+    pass

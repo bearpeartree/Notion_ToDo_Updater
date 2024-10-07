@@ -1,4 +1,6 @@
 from .Day import Day
+from .Exceptions import IllegalCalendarWeek as icw
+from .Exceptions import IllegalMonth as im
 
 class Week:
     def __init__(self, calendar_week, month, year):
@@ -12,8 +14,13 @@ class Week:
         if calendar_week >= 1 and calendar_week <= 52:
             self.calendar_week = calendar_week
         else:
-            raise ValueError("Kalenderwoche darf nur von 1 bis 52 sein!")
-        self.month = month
+            raise icw.IllegalCalendarWeekError("Kalenderwoche darf nur von 1 bis 52 sein!")
+        if month.lower() in ["januar", "februar", "märz", "april", # mache case insensitive
+                         "mai", "juni", "juli", "august", "september",
+                         "oktober", "november", "dezember"]:
+            self.month = month
+        else:
+            raise im.IllegalMonthError("Der Monat existiert nicht.")
 
 
     def get_calendar_week(self):

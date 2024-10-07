@@ -1,0 +1,2 @@
+class IllegalCalendarWeekError(ValueError):
+    pass
