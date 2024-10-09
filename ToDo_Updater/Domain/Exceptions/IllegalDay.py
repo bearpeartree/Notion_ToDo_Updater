@@ -1,0 +1,2 @@
+class IllegalDayException(ValueError):
+    pass
