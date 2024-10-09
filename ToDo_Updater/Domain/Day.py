@@ -1,11 +1,8 @@
-from datetime import date
 from .Task import Task
 
 class Day:
-    def __init__(self, day_name, in_week_cal, year):
-        self.day_name = day_name
-        self.in_week_cal = in_week_cal
-        self.year = year
+    def __init__(self, date_time):
+        self.date_time = date_time
         self.tasks = []
 
     def get_day_name(self):
