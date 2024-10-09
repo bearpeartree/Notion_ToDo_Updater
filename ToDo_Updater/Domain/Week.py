@@ -1,37 +1,33 @@
 from .Day import Day
-from .Exceptions import IllegalCalendarWeek as icw
-from .Exceptions import IllegalMonth as im
+from .Exceptions import IllegalDay
+from .day_factory import day_factory as df
+from datetime import timedelta, date
 
 class Week:
-    def __init__(self, calendar_week, month, year):
-        self.days = [Day("Montag", calendar_week, year), 
-                    Day("Dienstag", calendar_week, year),
-                    Day("Mittwoch", calendar_week, year),
-                    Day("Donnerstag", calendar_week, year),
-                    Day("Freitag", calendar_week, year),
-                    Day("Samstag", calendar_week, year),
-                    Day("Sonntag", calendar_week, year)]
-        if calendar_week >= 1 and calendar_week <= 52:
-            self.calendar_week = calendar_week
-        else:
-            raise icw.IllegalCalendarWeekError("Kalenderwoche darf nur von 1 bis 52 sein!")
-        if month.lower() in ["januar", "februar", "märz", "april", # mache case insensitive
-                         "mai", "juni", "juli", "august", "september",
-                         "oktober", "november", "dezember"]:
-            self.month = month
-        else:
-            raise im.IllegalMonthError("Der Monat existiert nicht.")
+    def __init__(self, day, month, year):
+        self.days = {"montag": df.create_day(year, month, day), # immer den Startday angeben von jeder Woche lol
+                    "dienstag": df.create_day(year, month, day).date_time + timedelta(days=1),
+                    "mittwoch": df.create_day(year, month, day).date_time + timedelta(days=2),
+                    "donnerstag": df.create_day(year, month, day).date_time + timedelta(days=3),
+                    "freitag": df.create_day(year, month, day).date_time + timedelta(days=4),
+                    "samstag": df.create_day(year, month, day).date_time + timedelta(days=5),
+                    "sonntag": df.create_day(year, month, day).date_time + timedelta(days=6)
+                    }
+        self.month = month
+        self.year = year
 
 
-    def get_calendar_week(self):
-        return self.calendar_week
+    def get_week_calendar(self):
+        first_weekday = self.days["montag"]
+        return first_weekday.date_time.isocalendar()[1]
     
 
     def get_day(self, day_name):
-        for i in self.days:
-            if i.get_day_name() == day_name:
-                return i
-        raise ValueError("Der Tag existiert nicht.")
+        day_name = day_name.lower()
+        if day_name not in self.days:
+            raise IllegalDay.IllegalDayException("Der Tag existiert nicht!")
+        else:
+            return self.days[day_name]
     
 
     def get_month(self):

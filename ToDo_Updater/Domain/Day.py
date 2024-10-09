@@ -5,11 +5,8 @@ class Day:
         self.date_time = date_time
         self.tasks = []
 
-    def get_day_name(self):
-        return self.day_name
-    
-    def get_in_week_cal(self):
-        return self.get_in_week_cal
+    def get_date(self):
+        return self.date_time
     
     def get_tasks(self):
         return self.tasks
