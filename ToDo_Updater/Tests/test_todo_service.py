@@ -8,17 +8,17 @@ from Domain.Exceptions import IllegalCalendarWeek as icw
 
 def test_valid_creation_new_week():
     service = ts.todo_service()
-    new_week = service.create_new_week(52, "Dezember", 2024)
+    new_week = service.create_new_week(7, 10, 2024)
     assert new_week is not None
 
 
 def test_week_seven_days():
     service = ts.todo_service()
-    new_week = service.create_new_week(52, "Dezember", 2024)
+    new_week = service.create_new_week(7, 10, 2024)
     assert len(new_week.get_days()) == 7
 
 
 def test_invalid_week_creation():
     service = ts.todo_service()
-    with pytest.raises(icw.IllegalCalendarWeekError):
-        service.create_new_week(53, "Dezember", 2024)
+    with pytest.raises(ValueError):
+        service.create_new_week(60, 100, 3)

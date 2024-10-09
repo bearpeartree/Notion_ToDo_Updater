@@ -5,16 +5,20 @@ from datetime import timedelta, date
 
 class Week:
     def __init__(self, day, month, year):
-        self.days = {"montag": df.create_day(year, month, day), # immer den Startday angeben von jeder Woche lol
-                    "dienstag": df.create_day(year, month, day).date_time + timedelta(days=1),
-                    "mittwoch": df.create_day(year, month, day).date_time + timedelta(days=2),
-                    "donnerstag": df.create_day(year, month, day).date_time + timedelta(days=3),
-                    "freitag": df.create_day(year, month, day).date_time + timedelta(days=4),
-                    "samstag": df.create_day(year, month, day).date_time + timedelta(days=5),
-                    "sonntag": df.create_day(year, month, day).date_time + timedelta(days=6)
-                    }
-        self.month = month
-        self.year = year
+        try:
+            self.days = {"montag": df.create_day(year, month, day), # immer den Startday angeben von jeder Woche lol
+                        "dienstag": df.create_day(year, month, day).date_time + timedelta(days=1),
+                        "mittwoch": df.create_day(year, month, day).date_time + timedelta(days=2),
+                        "donnerstag": df.create_day(year, month, day).date_time + timedelta(days=3),
+                        "freitag": df.create_day(year, month, day).date_time + timedelta(days=4),
+                        "samstag": df.create_day(year, month, day).date_time + timedelta(days=5),
+                        "sonntag": df.create_day(year, month, day).date_time + timedelta(days=6)
+                        }
+            self.month = month
+            self.year = year
+        except(ValueError) as e:
+            print("Datum ungültig")
+            raise e
 
 
     def get_week_calendar(self):
