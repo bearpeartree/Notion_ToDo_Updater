@@ -5,6 +5,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from Appservice import todo_service as ts
 from Domain.Exceptions import IllegalCalendarWeek as icw
+from Domain.day_factory import day_factory
+from Domain.Day import Day
 import datetime
 from datetime import date
 
@@ -23,8 +25,9 @@ def test_seven_days_new_week():
 def test_correct_day_conv():
     service = ts.todo_service()
     a_date = service.convert_to_date("6.12.2022")
-    assert a_date.date().month == 12
-    assert a_date.date().day == 6
-    assert a_date.date().year == 2022
+    date_time_a_date = a_date.get_date()
+    assert date_time_a_date.date().month == 12
+    assert date_time_a_date.date().day == 6
+    assert date_time_a_date.date().year == 2022
 
     

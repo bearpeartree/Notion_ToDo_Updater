@@ -16,3 +16,7 @@ class Day:
             self.tasks.append(Task(task, self.date_time))
         else:
             raise ValueError("Der Name der Aufgabe darf nicht leer sein!")
+    
+    # returns the week calendar the date is falling under
+    def get_week_calendar(self):
+        return self.date_time.isocalendar()[1]

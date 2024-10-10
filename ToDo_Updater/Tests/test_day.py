@@ -21,3 +21,8 @@ def test_add_noname_task():
     monday = new_week.get_day("Montag")
     with pytest.raises(ValueError):
         monday.add_task("")
+
+
+def test_correct_week_calendar():
+    new_day = day_factory.create_day(2021, 12, 6)
+    assert new_day.get_week_calendar() == 49
