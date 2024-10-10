@@ -5,14 +5,15 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from Domain.Day import Day as day
 from Domain.day_factory import day_factory
-from Domain import Task as task
+from Domain.Task import Task
 from Domain import Week as week
 
 
 def test_add_task():
     monday = day_factory.create_day(2022, 12, 6)
     monday.add_task("Zimmer dekorieren")
-    assert monday.get_tasks() == ["Zimmer dekorieren"]
+    tasks_for_monday = monday.get_tasks()
+    assert tasks_for_monday[0].get_task_name() == "Zimmer dekorieren"
 
 
 def test_add_noname_task():

@@ -13,6 +13,6 @@ class Day:
     
     def add_task(self, task):
         if task != "":
-            self.tasks.append(task)
+            self.tasks.append(Task(task, self.date_time))
         else:
             raise ValueError("Der Name der Aufgabe darf nicht leer sein!")
