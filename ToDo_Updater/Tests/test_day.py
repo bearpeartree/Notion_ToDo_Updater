@@ -26,3 +26,8 @@ def test_add_noname_task():
 def test_correct_week_calendar():
     new_day = day_factory.create_day(2021, 12, 6)
     assert new_day.get_week_calendar() == 49
+
+
+def test_correct_week_day():
+    new_day = day_factory.create_day(2021, 12, 6)
+    assert new_day.get_week_day() == "montag"
