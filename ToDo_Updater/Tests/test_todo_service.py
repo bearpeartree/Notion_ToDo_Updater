@@ -40,6 +40,34 @@ def test_correct_task():
     test_day = new_week.get_day("montag")
     assert len(test_day.get_tasks()) == 1
 
-    
+
+def test_empty_task():
+    service = ts.todo_service()
+    service.create_new_week(6, 12, 2021)
+
+    with pytest.raises(ValueError):
+        service.add_task_to_day("", "6.12.2021")
+
+
+def test_add_tasks_multiple_week_days():
+    service = ts.todo_service()
+    new_week = service.create_new_week(6, 12, 2021)
+
+    service.add_task_to_day("Vorlesung nachbereiten", "6.12.2021")
+    service.add_task_to_day("Zimmer aufräumen", "8.12.2021")
+
+    montag = new_week.get_day("montag")
+    mittwoch = new_week.get_day("mittwoch")
+
+    montag_tasks = montag.get_tasks()
+    mittwoch_tasks = mittwoch.get_tasks()
+    montag_task_name = montag_tasks[0].get_task_name()
+    mittwoch_task_name = mittwoch_tasks[0].get_task_name()
+
+    print(montag_task_name)
+    print(mittwoch_task_name)
+
+    assert montag_task_name == "Vorlesung nachbereiten"
+    assert mittwoch_task_name == "Zimmer aufräumen"
 
     

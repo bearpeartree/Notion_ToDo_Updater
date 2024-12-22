@@ -33,12 +33,15 @@ class todo_service: # Will be used by API_Client
          # take based on the day the suitable date object
          # add the task to the date
          conv_current_date = self.convert_to_date(current_date)
+         print(type(conv_current_date))
          week_cal = conv_current_date.get_week_calendar()
          current_week = self.weeks_in_store[week_cal]
 
 
          # find correct day in a week
          days_in_current_week = current_week.get_days()
+        #  for d in days_in_current_week:
+        #      print(type(days_in_current_week[d]))
          correct_day = days_in_current_week[conv_current_date.get_week_day()] # brauch den tag
          correct_day.add_task(task_name)
 
