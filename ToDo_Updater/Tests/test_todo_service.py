@@ -30,4 +30,16 @@ def test_correct_day_conv():
     assert date_time_a_date.date().day == 6
     assert date_time_a_date.date().year == 2022
 
+
+def test_correct_task():
+    service = ts.todo_service()
+    new_week = service.create_new_week(6, 12, 2021)
+
+    service.add_task_to_day("clean room", "6.12.2021")
+
+    test_day = new_week.get_day("montag")
+    assert len(test_day.get_tasks()) == 1
+
+    
+
     
