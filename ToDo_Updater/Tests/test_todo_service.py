@@ -112,3 +112,46 @@ def test_mark_empty_task_as_done():
     service.add_task_to_day("Vorlesung nachbereiten", "6.12.2021")
     with pytest.raises(ValueError):
         service.mark_task_as_done("", "6.12.2021")
+
+
+def test_basic_move_to_next_day():
+    service = ts.todo_service()
+    new_week = service.create_new_week(6, 12, 2021)
+    service.add_task_to_day("Vorlesung nachbereiten", "6.12.2021")
+    service.add_task_to_day("programmieren", "6.12.2021")
+
+    service.move_undone_tasks_to_next_day("6.12.2021")
+
+    dienstag = new_week.get_day("dienstag")
+    dienstag_tasks = dienstag.get_tasks()
+
+    task_names = []
+    for t in dienstag_tasks:
+        task_names.append(t.get_task_name())
+
+    assert set(task_names) == set(["Vorlesung nachbereiten", "programmieren"])
+
+
+def test_partial_move_to_next_day():
+    service = ts.todo_service()
+    new_week = service.create_new_week(6, 12, 2021)
+    service.add_task_to_day("Vorlesung nachbereiten", "6.12.2021")
+    service.add_task_to_day("programmieren", "6.12.2021")
+    service.add_task_to_day("Wäsche waschen", "6.12.2021")
+
+    service.mark_task_as_done("Wäsche waschen", "6.12.2021")
+    service.mark_task_as_done("programmieren", "6.12.2021")
+
+    service.move_undone_tasks_to_next_day("6.12.2021")
+
+
+    dienstag = new_week.get_day("dienstag")
+    dienstag_tasks = dienstag.get_tasks()
+
+    task_names = []
+    for t in dienstag_tasks:
+        task_names.append(t.get_task_name())
+
+    assert set(task_names) == set(["Vorlesung nachbereiten"])
+
+
