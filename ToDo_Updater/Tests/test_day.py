@@ -17,7 +17,7 @@ def test_add_task():
 
 
 def test_add_noname_task():
-    new_week = week.Week(24, 2, 2024)
+    new_week = week.Week(26, 2, 2024)
     monday = new_week.get_day("Montag")
     with pytest.raises(ValueError):
         monday.add_task("")

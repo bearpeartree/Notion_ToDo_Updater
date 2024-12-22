@@ -6,13 +6,20 @@ import datetime
 class Week:
     def __init__(self, day, month, year):
         try:
+            dienstag = df.create_day(year, month, day).date_time + datetime.timedelta(days=1)
+            mittwoch = df.create_day(year, month, day).date_time + datetime.timedelta(days=2)
+            donnerstag = df.create_day(year, month, day).date_time + datetime.timedelta(days=3)
+            freitag = df.create_day(year, month, day).date_time + datetime.timedelta(days=4)
+            samstag = df.create_day(year, month, day).date_time + datetime.timedelta(days=5)
+            sonntag = df.create_day(year, month, day).date_time + datetime.timedelta(days=6)
+
             self.days = {"montag": df.create_day(year, month, day), # immer den Startday angeben von jeder Woche lol
-                        "dienstag": df.create_day(year, month, day).date_time + datetime.timedelta(days=1),
-                        "mittwoch": df.create_day(year, month, day).date_time + datetime.timedelta(days=2),
-                        "donnerstag": df.create_day(year, month, day).date_time + datetime.timedelta(days=3),
-                        "freitag": df.create_day(year, month, day).date_time + datetime.timedelta(days=4),
-                        "samstag": df.create_day(year, month, day).date_time + datetime.timedelta(days=5),
-                        "sonntag": df.create_day(year, month, day).date_time + datetime.timedelta(days=6)
+                        "dienstag": df.create_day(dienstag.year, dienstag.month, dienstag.day),
+                        "mittwoch": df.create_day(mittwoch.year, mittwoch.month, mittwoch.day),
+                        "donnerstag": df.create_day(donnerstag.year, donnerstag.month, donnerstag.day),
+                        "freitag": df.create_day(freitag.year, freitag.month, freitag.day),
+                        "samstag": df.create_day(samstag.year, samstag.month, samstag.day),
+                        "sonntag": df.create_day(sonntag.year, sonntag.month, sonntag.day) 
                         }
             self.month = month
             self.year = year
@@ -33,9 +40,10 @@ class Week:
         else:
             return self.days[day_name]
     
-    def find_day_in_a_week(self, current_date):
-        conv_date = current_date.date()
-        week_day = conv_date.isoweekday() 
+    # def find_day_in_a_week(self, current_date): # ????? Wofür?
+    #     conv_date = current_date.date()
+    #     week_day = conv_date.isoweekday() 
+        
 
     def get_month(self):
         return self.month
