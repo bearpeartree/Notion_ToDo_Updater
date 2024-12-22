@@ -2,7 +2,6 @@ from Domain import Week as week
 from Domain import Day as day
 from Domain import Task as task
 from Domain import day_factory
-import datetime
 
 class todo_service: # Will be used by API_Client
     def __init__(self):
@@ -23,28 +22,34 @@ class todo_service: # Will be used by API_Client
         return self.weeks_in_store
     
 
+    def get_correct_day(self, current_date):
+        # find the week in which the current date is -> get calendar week of the date
+        # take based on the day the suitable date object
+        # add the task to the date
+        conv_current_date = self.convert_to_date(current_date)
+        week_cal = conv_current_date.get_week_calendar()
+        current_week = self.weeks_in_store[week_cal]
+
+         # find correct day in a week
+        days_in_current_week = current_week.get_days()
+
+        correct_day = days_in_current_week[conv_current_date.get_week_day()] # brauch den tag
+
+        return correct_day
+    
+
     # suppose current_date is a string
     # But do I need to store it somehwere? -> Just for one session is enough! It does not have persist 
         # I can retrieve that from Notion itself via API (GET)
         # Then the API Client can look it up under which week the current date falls 
         # Idea now: Every start: Fetch from Notion, load onto dict
     def add_task_to_day(self, task_name, current_date):
-         # find the week in which the current date is -> get calendar week of the date
-         # take based on the day the suitable date object
-         # add the task to the date
-         conv_current_date = self.convert_to_date(current_date)
-         print(type(conv_current_date))
-         week_cal = conv_current_date.get_week_calendar()
-         current_week = self.weeks_in_store[week_cal]
-
-
-         # find correct day in a week
-         days_in_current_week = current_week.get_days()
-        #  for d in days_in_current_week:
-        #      print(type(days_in_current_week[d]))
-         correct_day = days_in_current_week[conv_current_date.get_week_day()] # brauch den tag
+         correct_day = self.get_correct_day(current_date) 
          correct_day.add_task(task_name)
 
+    
+    def mark_task_as_done(self, task_name, current_day):
+        pass
     
     
     # tag, monat, jahr
