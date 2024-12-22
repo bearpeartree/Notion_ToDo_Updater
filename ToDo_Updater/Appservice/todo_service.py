@@ -48,8 +48,15 @@ class todo_service: # Will be used by API_Client
          correct_day.add_task(task_name)
 
     
+    # current_day is string
     def mark_task_as_done(self, task_name, current_day):
-        pass
+        correct_day = self.get_correct_day(current_day)
+        tasks_of_the_day = correct_day.get_tasks()
+        for t in tasks_of_the_day:
+            if t.get_task_name() == task_name:
+                t.set_task_to_finished()
+            else:
+                raise ValueError("Aufgabe nicht gefunden!")
     
     
     # tag, monat, jahr

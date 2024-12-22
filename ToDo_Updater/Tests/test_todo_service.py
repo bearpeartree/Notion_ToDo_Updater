@@ -84,3 +84,14 @@ def test_add_tasks_to_same_day():
 
     assert set(tasks_name) == set(["Vorlesung nachbereiten", "programmieren"])
     
+
+def test_mark_existing_task_as_done():
+    service = ts.todo_service()
+    new_week = service.create_new_week(6, 12, 2021)
+    service.add_task_to_day("Vorlesung nachbereiten", "6.12.2021")
+
+    service.mark_task_as_done("Vorlesung nachbereiten", "6.12.2021")
+    montag = new_week.get_day("montag")
+    montag_tasks = montag.get_tasks()
+    
+    assert montag_tasks[0].is_finished() == True
