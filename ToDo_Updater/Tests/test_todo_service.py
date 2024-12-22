@@ -64,10 +64,23 @@ def test_add_tasks_multiple_week_days():
     montag_task_name = montag_tasks[0].get_task_name()
     mittwoch_task_name = mittwoch_tasks[0].get_task_name()
 
-    print(montag_task_name)
-    print(mittwoch_task_name)
 
     assert montag_task_name == "Vorlesung nachbereiten"
     assert mittwoch_task_name == "Zimmer aufräumen"
 
+
+def test_add_tasks_to_same_day():
+    service = ts.todo_service()
+    new_week = service.create_new_week(6, 12, 2021)
+
+    service.add_task_to_day("Vorlesung nachbereiten", "6.12.2021")
+    service.add_task_to_day("programmieren", "6.12.2021")
+
+    montag = new_week.get_day("montag")
+    montag_tasks = montag.get_tasks()
+    tasks_name = []
+    for m in montag_tasks:
+        tasks_name.append(m.get_task_name())
+
+    assert set(tasks_name) == set(["Vorlesung nachbereiten", "programmieren"])
     
