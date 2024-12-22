@@ -20,7 +20,7 @@ class Day:
         
         return tasks_names
     
-    
+
     def add_task(self, task):
         if task != "":
             self.tasks.append(Task(task, self.date_time))
@@ -49,3 +49,16 @@ class Day:
                 return "samstag"
             case 7:
                 return "sonntag"
+            
+    
+    def get_unfinished_tasks(self):
+        unfinished = []
+        for t in self.tasks:
+            if t.is_finished() == False:
+                unfinished.append(t)
+        
+        return unfinished
+    
+
+    def add_task_list_to_task(self, tasks):
+        return self.tasks.extend(tasks)

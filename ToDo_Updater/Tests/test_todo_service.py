@@ -155,3 +155,19 @@ def test_partial_move_to_next_day():
     assert set(task_names) == set(["Vorlesung nachbereiten"])
 
 
+def test_edged_move_to_next_day():
+    service = ts.todo_service()
+    new_week = service.create_new_week(26, 2, 2024)
+    service.add_task_to_day("Geschirr spülen", "29.2.2024")
+
+    service.move_undone_tasks_to_next_day("29.2.2024")
+
+    freitag = new_week.get_day("freitag")
+    freitag_tasks = freitag.get_tasks()
+
+    task_names = []
+    for t in freitag_tasks:
+        task_names.append(t.get_task_name())
+
+    assert set(task_names) == set(["Geschirr spülen"])
+

@@ -22,6 +22,31 @@ class todo_service: # Will be used by API_Client
         return self.weeks_in_store
     
 
+    def get_next_day(self, current_date):
+        conv_current_date = self.convert_to_date(current_date)
+        week_cal = conv_current_date.get_week_calendar()
+        current_week = self.weeks_in_store[week_cal]
+
+        days_in_current_week = current_week.get_days()
+
+        match(conv_current_date.get_week_day()):
+            case "montag":
+                return days_in_current_week["dienstag"]
+            case "dienstag":
+                return days_in_current_week["mittwoch"]
+            case "mittwoch":
+                return days_in_current_week["donnerstag"]
+            case "donnerstag":
+                return days_in_current_week["freitag"]
+            case "freitag":
+                return days_in_current_week["samstag"]
+            case "samstag":
+                return days_in_current_week["sonntag"]
+            case _:
+                return days_in_current_week["montag"]
+
+    
+
     def get_correct_day(self, current_date):
         # find the week in which the current date is -> get calendar week of the date
         # take based on the day the suitable date object
@@ -50,13 +75,24 @@ class todo_service: # Will be used by API_Client
     
     # current_day is string
     def mark_task_as_done(self, task_name, current_day):
+        found = False
         correct_day = self.get_correct_day(current_day)
         tasks_of_the_day = correct_day.get_tasks()
         for t in tasks_of_the_day:
             if t.get_task_name() == task_name:
                 t.set_task_to_finished()
-            else:
-                raise ValueError("Aufgabe nicht gefunden!")
+                found = True
+        if(found == False):
+            raise ValueError("Aufgabe nicht gefunden!")
+            
+    
+    def move_undone_tasks_to_next_day(self, current_day):
+        correct_day = self.get_correct_day(current_day)
+        undone_tasks = correct_day.get_unfinished_tasks()
+
+        next_day = self.get_next_day(current_day)
+
+        next_day.add_task_list_to_task(undone_tasks)
     
     
     # tag, monat, jahr
