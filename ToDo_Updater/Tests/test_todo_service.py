@@ -95,3 +95,20 @@ def test_mark_existing_task_as_done():
     montag_tasks = montag.get_tasks()
     
     assert montag_tasks[0].is_finished() == True
+
+
+def test_mark_non_existing_task_as_done():
+    service = ts.todo_service()
+    service.create_new_week(6, 12, 2021)
+    service.add_task_to_day("Vorlesung nachbereiten", "6.12.2021")
+
+    with pytest.raises(ValueError):
+        service.mark_task_as_done("Hallo", "6.12.2021")
+
+
+def test_mark_empty_task_as_done():
+    service = ts.todo_service()
+    service.create_new_week(6, 12, 2021)
+    service.add_task_to_day("Vorlesung nachbereiten", "6.12.2021")
+    with pytest.raises(ValueError):
+        service.mark_task_as_done("", "6.12.2021")

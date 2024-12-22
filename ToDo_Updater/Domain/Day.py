@@ -11,6 +11,15 @@ class Day:
     
     def get_tasks(self):
         return self.tasks
+
+
+    def get_all_tasks_names(self):
+        tasks_names = []
+        for t in self.tasks:
+            tasks_names.append(t.get_task_name())
+        
+        return tasks_names
+    
     
     def add_task(self, task):
         if task != "":
