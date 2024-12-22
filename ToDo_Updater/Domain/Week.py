@@ -39,10 +39,6 @@ class Week:
             raise IllegalDay.IllegalDayException("Der Tag existiert nicht!")
         else:
             return self.days[day_name]
-    
-    # def find_day_in_a_week(self, current_date): # ????? Wofür?
-    #     conv_date = current_date.date()
-    #     week_day = conv_date.isoweekday() 
         
 
     def get_month(self):
