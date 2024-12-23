@@ -99,3 +99,23 @@ class todo_service: # Will be used by API_Client
     def convert_to_date(self, some_date):
         splitted_date = some_date.split(sep=".")
         return day_factory.day_factory.create_day(int(splitted_date[2]), int(splitted_date[1]), int(splitted_date[0]))
+
+    
+    # recurrent_day = an welchem Tag soll es wiederholt werden? (String Wochentag name)
+    # time_span = Für lange soll es wiederholt werden? (Anzahl Wochen für jetzt als integer)
+    def add_mundane_task(self, task_name, recurrent_day, start_day, time_span):
+        correct_day = self.get_correct_day(start_day)
+        calendar_week = correct_day.get_week_calendar()
+
+        the_weeks_within_time_span = [] # week objects inklusive heutige Woche
+
+        for i in range(0, time_span):
+            if calendar_week+i > 52: # Spezialfall: Ins neue Jahr übertragen
+                calendar_week = 0
+                the_weeks_within_time_span.append(self.weeks_in_store[calendar_week+i])
+            else:
+                the_weeks_within_time_span.append(self.weeks_in_store[calendar_week+i])
+        
+        for week in the_weeks_within_time_span:
+            found_day = week.get_day(recurrent_day)
+            found_day.add_task(task_name)
