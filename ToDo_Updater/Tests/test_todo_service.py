@@ -171,3 +171,26 @@ def test_edged_move_to_next_day():
 
     assert set(task_names) == set(["Geschirr spülen"])
 
+
+def test_recurrent_task_easy_case_3_weeks():
+    service = ts.todo_service()
+    new_week = service.create_new_week(2, 12, 2024)
+    new_week2 = service.create_new_week(9, 12, 2024)
+    new_week3 = service.create_new_week(16, 12, 2024)
+
+    service.add_mundane_task("Geschirr spülen", "montag", "2.12.2024", 3)
+
+    montag = new_week.get_day("montag")
+    montag2 = new_week2.get_day("montag")
+    montag3 = new_week3.get_day("montag")
+
+    task_names = []
+    montag_task = montag.get_tasks()
+    montag2_task = montag2.get_tasks()
+    montag3_task = montag3.get_tasks()
+
+    task_names.append(montag_task[0].get_task_name())
+    task_names.append(montag2_task[0].get_task_name())
+    task_names.append(montag3_task[0].get_task_name())
+
+    assert set(task_names) == set(["Geschirr spülen"])
