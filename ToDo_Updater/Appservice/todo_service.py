@@ -53,6 +53,10 @@ class todo_service: # Will be used by API_Client
         # add the task to the date
         conv_current_date = self.convert_to_date(current_date)
         week_cal = conv_current_date.get_week_calendar()
+
+        if week_cal not in self.weeks_in_store.keys():
+            raise KeyError("Tag konnte nicht gefunden werden!")
+
         current_week = self.weeks_in_store[week_cal]
 
          # find correct day in a week
@@ -119,3 +123,17 @@ class todo_service: # Will be used by API_Client
         for week in the_weeks_within_time_span:
             found_day = week.get_day(recurrent_day)
             found_day.add_task(task_name)
+
+    
+    def move_task_of_today_to_any_other_day(self, task_name, today_day, goal_day):
+        correct_goal_day = self.get_correct_day(goal_day)
+        correct_today = self.get_correct_day(today_day)
+        tasks = correct_today.get_tasks()
+        moved_task = None
+        for t in tasks:
+            if t.get_task_name() == task_name:
+                moved_task = t
+        if moved_task == None:
+            raise ValueError("Aufgabe für den " + task_name + " existiert nicht!")
+        else:
+            correct_goal_day.add_task(task_name)

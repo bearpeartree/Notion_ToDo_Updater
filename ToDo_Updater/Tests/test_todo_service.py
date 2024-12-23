@@ -241,3 +241,21 @@ def test_move_existing_task_to_another_day():
     sonntag_tasks = sonntag.get_tasks()
 
     assert sonntag_tasks[0].get_task_name() == "Nachbereitung"
+
+
+def test_move_non_existing_task_throws_exception():
+    service = ts.todo_service()
+    service.create_new_week(2, 12, 2024)
+    service.add_task_to_day("Nachbereitung", "5.12.2024")
+
+    with pytest.raises(ValueError):
+        service.move_task_of_today_to_any_other_day("Wäsche", "5.12.2024", "6.12.2024")
+
+
+def test_move_existing_task_to_non_existing_goal_date():
+    service = ts.todo_service()
+    service.create_new_week(2, 12, 2024)
+    service.add_task_to_day("Nachbereitung", "5.12.2024")
+
+    with pytest.raises(KeyError):
+        service.move_task_of_today_to_any_other_day("Nachbereitung", "5.12.2024", "12.12.2024")
