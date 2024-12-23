@@ -228,3 +228,16 @@ def test_recurrent_task_edged_weeks():
     task_names.append(donnerstag3_task[0].get_task_name())
 
     assert set(task_names) == set(["programmieren", "Nachbereitung"])
+
+
+def test_move_existing_task_to_another_day():
+    service = ts.todo_service()
+    new_week = service.create_new_week(2, 12, 2024)
+    service.add_task_to_day("Nachbereitung", "5.12.2024")
+
+    service.move_task_of_today_to_any_other_day("Nachbereitung", "5.12.2024", "8.12.2024")
+
+    sonntag = new_week.get_day("sonntag")
+    sonntag_tasks = sonntag.get_tasks()
+
+    assert sonntag_tasks[0].get_task_name() == "Nachbereitung"
