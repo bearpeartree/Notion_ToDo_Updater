@@ -137,3 +137,7 @@ class todo_service: # Will be used by API_Client
             raise ValueError("Aufgabe für den " + task_name + " existiert nicht!")
         else:
             correct_goal_day.add_task(task_name)
+    
+
+    def get_correct_week(self, calendar_week):
+        return self.weeks_in_store[calendar_week]

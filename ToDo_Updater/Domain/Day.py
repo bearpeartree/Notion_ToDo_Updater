@@ -1,5 +1,5 @@
 from .Task import Task
-import datetime
+from datetime import datetime
 
 class Day:
     def __init__(self, date_time):
@@ -62,3 +62,10 @@ class Day:
 
     def add_task_list_to_task(self, tasks):
         return self.tasks.extend(tasks)
+    
+
+    def format_datetime_to_string(self):
+        year = self.date_time.strftime("%Y")
+        month = self.date_time.strftime("%m")
+        day = self.date_time.strftime("%d")
+        return day + "." + month + "." + year
