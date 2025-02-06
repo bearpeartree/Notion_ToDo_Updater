@@ -15,10 +15,10 @@ def main():
     new_json_weektext = jb.build_week_text("02", "06.01.2025", "12.01.2025")
     print(new_json_weektext)
 
-    print()
-    new_json_week = jb.build_new_week("02")
-    print(new_json_week)
 
+    print()
+    new_json_toggle_day = jb.build_new_day_toggle("Montag","1999.12.2021")
+    print(new_json_toggle_day)
 
 
 if __name__ == "__main__":

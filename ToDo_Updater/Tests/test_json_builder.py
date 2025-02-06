@@ -40,3 +40,11 @@ def test_build_invalid_new_day_toggle():
 
     with pytest.raises(ValueError):
         json_b.build_new_day_toggle("BlaBlub", "some_day")
+
+
+def test_new_day_toggle_3_digits_day_invalid():
+    json_b = jb.json_builder()
+
+
+    with pytest.raises(ValueError):
+        json_b.build_new_day_toggle("Montag", "199.24.2021")

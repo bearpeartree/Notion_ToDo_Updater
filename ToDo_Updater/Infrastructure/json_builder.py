@@ -16,15 +16,15 @@ class json_builder:
     
     def __get_random_background_color(self):
         bc_list = [color_member for color_member in color]
-        rand_index = randint(0, len(bc_list))
+        rand_index = randint(0, len(bc_list)-1)
         return bc_list[rand_index]
 
 
     # string - Wochentag (Montag...), Datum
     def build_new_day_toggle(self, week_day, full_date):
-        pattern = re.compile("(^[0-9]).([0-9]).([1-9][0-9][0-9][0-9])")
+        pattern = re.compile("(^[0-9][0-9]).([0-9][0-9]).([1-9][0-9][0-9][0-9])")
         
-        if re.match(pattern, full_date) == False:
+        if not re.match(pattern, full_date):
             raise ValueError("Format des Datums falsch!") # Vllt date format error?
         elif week_day.lower() not in ["montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag", "sonntag"]:
             raise ValueError("Tag existiert nicht!")
