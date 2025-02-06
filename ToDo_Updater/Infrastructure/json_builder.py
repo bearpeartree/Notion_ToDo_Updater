@@ -2,10 +2,12 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import json
+import re
+
 from Domain.Color import color
 from random import randint
 from Appservice import todo_service as ts
-import json
 
 class json_builder:
     def __init__(self):
@@ -20,6 +22,13 @@ class json_builder:
 
     # string - Wochentag (Montag...), Datum
     def build_new_day_toggle(self, week_day, full_date):
+        pattern = re.compile("(^[0-9]).([0-9]).([1-9][0-9][0-9][0-9])")
+        
+        if re.match(pattern, full_date) == False:
+            raise ValueError("Format des Datums falsch!") # Vllt date format error?
+        elif week_day.lower() not in ["montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag", "sonntag"]:
+            raise ValueError("Tag existiert nicht!")
+
         return {
                 "object": "block",
                 "type": "toggle",
