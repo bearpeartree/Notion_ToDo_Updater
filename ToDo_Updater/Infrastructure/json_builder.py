@@ -10,7 +10,8 @@ from random import randint
 from Appservice import todo_service as ts
 
 class json_builder:
-    def __init__(self):
+    def __init__(self, td_service):
+        self.service = td_service
         self.json_builder = json_builder
 
     
@@ -81,8 +82,8 @@ class json_builder:
 
 
     def build_new_week(self, calendar_week):
-        service = ts.todo_service()
-        correct_week = service.get_correct_week(int(calendar_week)) # Week Object with Day Objects
+        correct_week = self.service.get_correct_week(int(calendar_week)) # Week Object with Day Objects
+
         new_week = {
             "children": []
         }
