@@ -145,7 +145,6 @@ class todo_service: # Will be used by API_Client
         return self.weeks_in_store[calendar_week]
     
 
-    # TODO
     def convert_week_to_day_string(self, calendar_week):
         correct_week = self.get_correct_week(calendar_week)
 

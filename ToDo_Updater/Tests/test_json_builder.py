@@ -240,3 +240,27 @@ def test_new_valid_week(mocker):
     }
 
     assert tested_json == json.dumps(expected_json)
+
+
+
+def test_non_existent_week_creation(mocker):
+    fake_service = mocker.patch("Appservice.todo_service")
+
+    fake_service.convert_week_to_day_string.side_effect = KeyError("Woche existiert nicht!")
+
+    json_b = jb.json_builder(fake_service)
+
+    with pytest.raises(KeyError):
+        json_b.build_new_week("2")
+
+
+def test_invalid_week_creation(mocker):
+    fake_service = mocker.patch("Appservice.todo_service")
+
+    fake_service.convert_week_to_day_string.side_effect = ValueError("Woche muss eine Zahl sein!")
+
+    json_b = jb.json_builder(fake_service)
+
+    with pytest.raises(ValueError):
+        json_b.build_new_week("blablub")
+    

@@ -86,6 +86,8 @@ class json_builder:
 
 
     def build_new_week(self, calendar_week):
+        if calendar_week.isnumeric() == False:
+            raise ValueError("Woche muss eine Zahl sein!")
         string_days_of_week = self.service.convert_week_to_day_string(int(calendar_week))
 
         new_week = {
