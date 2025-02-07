@@ -54,6 +54,10 @@ class json_builder:
 
     # string - Kalenderwoche, Startdatum, Enddatum
     def build_week_text(self, calendar_week, start_week, end_week):
+        new_digit = calendar_week
+        if(len(new_digit) == 1):
+            new_digit = "0" + calendar_week 
+
 
         random_background_color = self.__get_random_background_color()
 
@@ -65,7 +69,7 @@ class json_builder:
 					{
 						"type": "text",
 						"text": {
-							"content": "Woche " + calendar_week + " / " + start_week + " - " + end_week,
+							"content": "Woche " + new_digit + " / " + start_week + " - " + end_week,
                             "link": None
 						},
                         "annotations": {
@@ -73,7 +77,7 @@ class json_builder:
         		            "italic": False,
         		            "strikethrough": False,
         		            "underline": True,
-        		            "color": random_background_color.value
+        		            "color": random_background_color
                         }
 					}
 				]
@@ -98,7 +102,7 @@ class json_builder:
         # add the individual days
         days = correct_week.get_days()
 
-        for day in days:
+        for day in days.values():
             new_week["children"].append(self.build_new_day_toggle(day.get_week_day().capitalize(), day.format_datetime_to_string()))
 
 
