@@ -140,10 +140,8 @@ class todo_service: # Will be used by API_Client
     
 
     def get_correct_week(self, calendar_week):
-        print(self.weeks_in_store.keys())
         if calendar_week not in self.weeks_in_store.keys():
             raise KeyError("Woche existiert nicht!")
-        print(self.weeks_in_store.keys())
         return self.weeks_in_store[calendar_week]
     
 
