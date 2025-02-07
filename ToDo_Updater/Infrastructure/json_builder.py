@@ -86,24 +86,21 @@ class json_builder:
 
 
     def build_new_week(self, calendar_week):
-        correct_week = self.service.get_correct_week(int(calendar_week)) # Week Object with Day Objects
+        string_days_of_week = self.service.convert_week_to_day_string(int(calendar_week))
 
         new_week = {
             "children": []
         }
 
-        # add the week text
-        montag = correct_week.get_day("montag")
-        sonntag = correct_week.get_day("sonntag")
-        formatted_montag = montag.format_datetime_to_string()
-        formatted_sonntag = sonntag.format_datetime_to_string()
-        new_week["children"].append(self.build_week_text(calendar_week,formatted_montag, formatted_sonntag))
+        # add the week text (header)
+        montag = string_days_of_week[0]
+        sonntag = string_days_of_week[len(string_days_of_week)-1]
+        new_week["children"].append(self.build_week_text(calendar_week,montag[1], sonntag[1]))
 
-        # add the individual days
-        days = correct_week.get_days()
-
-        for day in days.values():
-            new_week["children"].append(self.build_new_day_toggle(day.get_week_day().capitalize(), day.format_datetime_to_string()))
+        # add the individual days as toggles
+        for day in string_days_of_week:
+            new_week["children"].append(self.build_new_day_toggle(day[0], day[1]))
 
 
+        # return json string
         return json.dumps(new_week)

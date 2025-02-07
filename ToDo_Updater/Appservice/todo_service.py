@@ -141,10 +141,21 @@ class todo_service: # Will be used by API_Client
 
     def get_correct_week(self, calendar_week):
         if calendar_week not in self.weeks_in_store.keys():
-            raise KeyError("Woche existiert nicht!")
+            raise KeyError("Woche existiert nicht!") # Costum Exception... Es ist kein KeyError im fachlichen Sinne lol 
         return self.weeks_in_store[calendar_week]
     
 
     # TODO
-    # def convert_day_to_string(self, date):
-    #     correct_day = self.get_correct_day(date)
+    def convert_week_to_day_string(self, calendar_week):
+        correct_week = self.get_correct_week(calendar_week)
+
+        # Tupel aus (Wochentag, Formatiertes_Datum)
+        string_dates = []
+
+        days_of_week = correct_week.get_days()
+
+        for day in days_of_week.values():
+            string_dates.append((day.get_week_day().capitalize(), day.format_datetime_to_string()))
+        
+        return string_dates
+

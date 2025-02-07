@@ -8,8 +8,6 @@ import json
 
 
 from Infrastructure import json_builder as jb
-from Appservice import todo_service as ts
-from Domain import Week
 
 
 def test_build_correct_new_day_toggle(mocker):
@@ -62,9 +60,10 @@ def test_new_valid_week(mocker):
     fake_service = mocker.patch("Appservice.todo_service")
 
     # Setup for fake_service
-    new_week = Week.Week(3, 2, 2025)
+    string_dates = [("Montag", "03.02.2025"), ("Dienstag", "04.02.2025"), ("Mittwoch", "05.02.2025"),
+                    ("Donnerstag", "06.02.2025"), ("Freitag", "07.02.2025"), ("Samstag", "08.02.2025"), ("Sonntag", "09.02.2025")]
+    fake_service.convert_week_to_day_string.return_value = string_dates
 
-    fake_service.get_correct_week.return_value = new_week
     
     json_b = jb.json_builder(fake_service)
 
