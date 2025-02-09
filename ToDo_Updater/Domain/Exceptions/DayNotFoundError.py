@@ -1,0 +1,2 @@
+class DayNotFoundError(ValueError):
+    pass

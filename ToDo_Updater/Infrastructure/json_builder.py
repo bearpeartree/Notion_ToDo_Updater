@@ -7,7 +7,10 @@ import re
 
 from Domain.Color import color
 from random import randint
-from Appservice import todo_service as ts
+from Appservice import todo_service
+from Domain.Exceptions.DateFormatError import DateFormatError 
+from Domain.Exceptions.DayNotFoundError import DayNotFoundError
+from Domain.Exceptions.IllegalCalendarWeek import IllegalCalendarWeekError
 
 class json_builder:
     def __init__(self, td_service):
@@ -26,9 +29,9 @@ class json_builder:
         pattern = re.compile("(^[0-9][0-9]).([0-9][0-9]).([1-9][0-9][0-9][0-9])")
         
         if not re.match(pattern, full_date):
-            raise ValueError("Format des Datums falsch!") # Vllt date format error?
+            raise DateFormatError("Format des Datums falsch!")
         elif week_day.lower() not in ["montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag", "sonntag"]:
-            raise ValueError("Tag existiert nicht!")
+            raise DayNotFoundError("Tag existiert nicht!")
 
         return {
                 "object": "block",
@@ -87,7 +90,9 @@ class json_builder:
 
     def build_new_week(self, calendar_week):
         if calendar_week.isnumeric() == False:
-            raise ValueError("Woche muss eine Zahl sein!")
+            raise ValueError("Kalenderwoche muss eine Zahl sein!")
+        if int(calendar_week) <= 0 or int(calendar_week) > 52:
+            raise IllegalCalendarWeekError("Kalenderwoche ist eine ungültige Zahl!")
         string_days_of_week = self.service.convert_week_to_day_string(int(calendar_week))
 
         new_week = {
