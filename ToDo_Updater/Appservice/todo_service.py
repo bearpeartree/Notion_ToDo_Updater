@@ -77,6 +77,7 @@ class todo_service: # Will be used by API_Client
          correct_day.add_task(task_name)
 
     
+    # JSON
     # current_day is string
     def mark_task_as_done(self, task_name, current_day):
         found = False
@@ -89,7 +90,7 @@ class todo_service: # Will be used by API_Client
         if(found == False):
             raise ValueError("Aufgabe nicht gefunden!")
             
-    
+    # JSON
     def move_undone_tasks_to_next_day(self, current_day):
         correct_day = self.get_correct_day(current_day)
         undone_tasks = correct_day.get_unfinished_tasks()
@@ -104,7 +105,8 @@ class todo_service: # Will be used by API_Client
         splitted_date = some_date.split(sep=".")
         return day_factory.day_factory.create_day(int(splitted_date[2]), int(splitted_date[1]), int(splitted_date[0]))
 
-    
+
+    # JSON
     # recurrent_day = an welchem Tag soll es wiederholt werden? (String Wochentag name)
     # time_span = Für lange soll es wiederholt werden? (Anzahl Wochen für jetzt als integer)
     def add_mundane_task(self, task_name, recurrent_day, start_day, time_span):
@@ -124,7 +126,7 @@ class todo_service: # Will be used by API_Client
             found_day = week.get_day(recurrent_day)
             found_day.add_task(task_name)
 
-    
+    #JSON
     def move_task_of_today_to_any_other_day(self, task_name, today_day, goal_day):
         correct_goal_day = self.get_correct_day(goal_day)
         correct_today = self.get_correct_day(today_day)
