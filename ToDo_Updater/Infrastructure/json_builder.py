@@ -53,6 +53,29 @@ class json_builder:
                     }]
                 }
             }
+    
+
+    def create_new_todo(self, task_name):
+        return {
+            "object": "block",
+            "type": "to_do",
+            "has_children": False,
+            "to_do": {
+                "rich_text": [{
+                    "type": "text",
+                    "text": {
+                        "content": task_name,
+                        "link": None
+                    }
+                }]
+            }
+        }
+    
+
+    # Erwartet: JSON Objekt für eine Woche, task_name als String
+    # Return: JSON String mit der eingefügten ToDo
+    def add_todo_to_date(self, json_week, task_name):
+        pass
 
 
     # string - Kalenderwoche, Startdatum, Enddatum
