@@ -158,3 +158,20 @@ def test_add_new_todo_to_invalid_date_format(mocker):
 
     with pytest.raises(DateFormatError):
         json_b.add_todo_to_date(empty_weekdays, "bla", "48234.122.203.222")
+
+
+def test_add_new_multiple_todos_to_multipe_dates(mocker):
+    fake_service = mocker.patch("Appservice.todo_service")
+
+    json_b = jb.json_builder(fake_service)
+
+    with open("json_files_for_tests/new_valid_multiple_todo_week.json") as f:
+        expected_json = json.load(f)
+
+    with open("json_files_for_tests/new_valid_week.json") as e:
+        empty_weekdays = json.load(e)
+
+    first_add = json_b.add_todo_to_date(empty_weekdays, "Programmierung", "05.02.2025")
+    second_add = json_b.add_todo_to_date(json.loads(first_add), "Kochen", "06.02.2025")
+
+    assert second_add == json.dumps(expected_json)
