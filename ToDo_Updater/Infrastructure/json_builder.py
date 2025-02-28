@@ -75,6 +75,12 @@ class json_builder:
     # Erwartet: JSON String für eine Woche, task_name als String
     # Return: JSON String mit der eingefügten ToDo
     def add_todo_to_date(self, json_week, task_name, date):
+
+        pattern = re.compile("(^[0-9][0-9]).([0-9][0-9]).([1-9][0-9][0-9][0-9])")
+        
+        if not re.match(pattern, date):
+            raise DateFormatError("Format des Datums falsch!")
+
         json_week_first_child = json_week["children"]
         for day in json_week_first_child:
             if day["type"] == "toggle":

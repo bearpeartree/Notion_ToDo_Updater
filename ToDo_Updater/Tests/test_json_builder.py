@@ -146,3 +146,15 @@ def test_add_new_todo_to_nonexistent_date(mocker):
     
     with pytest.raises(DayNotFoundError):
         json_b.add_todo_to_date(empty_weekdays, "blub", "10.02.2025")
+
+
+def test_add_new_todo_to_invalid_date_format(mocker):
+    fake_service = mocker.patch("Appservice.todo_service")
+
+    json_b = jb.json_builder(fake_service)
+
+    with open("json_files_for_tests/new_valid_week.json") as e:
+        empty_weekdays = json.load(e)
+
+    with pytest.raises(DateFormatError):
+        json_b.add_todo_to_date(empty_weekdays, "bla", "48234.122.203.222")
