@@ -81,10 +81,10 @@ def test_new_valid_week(mocker):
 
     tested_json = json_b.build_new_week("6")
 
+    # Redundant? Du brauchst nur den JSON String?
     with open("json_files_for_tests/new_valid_week.json") as f:
         expected_json = json.load(f)
     
-    print(tested_json)
 
     assert tested_json == json.dumps(expected_json)
 
@@ -119,4 +119,18 @@ def test_non_valid_weeknumber_creation(mocker):
     with pytest.raises(IllegalCalendarWeekError):
         json_b.build_new_week("1000")
 
-    
+
+def test_add_new_todo_to_date(mocker):
+    fake_service = mocker.patch("Appservice.todo_service")
+
+    json_b = jb.json_builder(fake_service)
+
+    with open("json_files_for_tests/new_valid_todo_week.json") as f:
+        expected_json = json.load(f)
+
+    with open("json_files_for_tests/new_valid_week.json") as e:
+        empty_weekdays = json.load(e)
+
+    to_be_tested_json = json_b.add_todo_to_date(empty_weekdays, "Finish programming", "05.02.2025")
+
+    assert to_be_tested_json == json.dumps(expected_json)

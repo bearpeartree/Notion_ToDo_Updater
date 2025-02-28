@@ -72,10 +72,21 @@ class json_builder:
         }
     
 
-    # Erwartet: JSON Objekt für eine Woche, task_name als String
+    # Erwartet: JSON String für eine Woche, task_name als String
     # Return: JSON String mit der eingefügten ToDo
-    def add_todo_to_date(self, json_week, task_name):
-        pass
+    def add_todo_to_date(self, json_week, task_name, date):
+        # json_week = json.loads(json_week)
+        json_week_first_child = json_week["children"]
+        for day in json_week_first_child:
+            if day["type"] == "toggle":
+                current_date = day["toggle"]["rich_text"][0]["text"]["content"]
+                if date in current_date:
+                    # Wenn keine Children als Liste vorhanden
+                    if "children" not in day["toggle"]:
+                        day["toggle"]["children"] = []
+                    day["toggle"]["children"].append(self.create_new_todo(task_name))
+        
+        return json.dumps(json_week)
 
 
     # string - Kalenderwoche, Startdatum, Enddatum
