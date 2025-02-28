@@ -75,7 +75,6 @@ class json_builder:
     # Erwartet: JSON String für eine Woche, task_name als String
     # Return: JSON String mit der eingefügten ToDo
     def add_todo_to_date(self, json_week, task_name, date):
-
         pattern = re.compile("(^[0-9][0-9]).([0-9][0-9]).([1-9][0-9][0-9][0-9])")
         
         if not re.match(pattern, date):
@@ -93,6 +92,16 @@ class json_builder:
                     return json.dumps(json_week)
         
         raise DayNotFoundError("Datum nicht in der Woche gefunden!")
+    
+
+    # Ich könnte eine Liste von Aufgaben entgegen nehmen (also neue Methode) und dann alle zum dazugehörigen Tag
+    # hinzufügen
+    def add_multiple_todos_to_same_date(self, json_week, tasks, date):
+        udpated_json_week = json_week
+        for task in tasks:
+            udpated_json_week = self.add_todo_to_date(json_week, task, date)
+        
+        return udpated_json_week
 
 
     # string - Kalenderwoche, Startdatum, Enddatum

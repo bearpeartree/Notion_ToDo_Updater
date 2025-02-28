@@ -175,3 +175,20 @@ def test_add_new_multiple_todos_to_multipe_dates(mocker):
     second_add = json_b.add_todo_to_date(json.loads(first_add), "Kochen", "06.02.2025")
 
     assert second_add == json.dumps(expected_json)
+
+
+def test_add_new_multiple_todos_to_same_date(mocker):
+    fake_service = mocker.patch("Appservice.todo_service")
+
+    json_b = jb.json_builder(fake_service)
+
+    with open("json_files_for_tests/new_valid_multiple_todos_same_date.json") as f:
+        expected_json = json.load(f)
+
+    with open("json_files_for_tests/new_valid_week.json") as e:
+        empty_weekdays = json.load(e)
+    todos = ["Programmierung", "Kochen", "Häkeln"]
+
+    to_be_tested = json_b.add_multiple_todos_to_same_date(empty_weekdays, todos, "05.02.2025")
+
+    assert to_be_tested == json.dumps(expected_json)
