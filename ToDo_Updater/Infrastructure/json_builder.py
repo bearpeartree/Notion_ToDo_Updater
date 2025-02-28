@@ -75,7 +75,6 @@ class json_builder:
     # Erwartet: JSON String für eine Woche, task_name als String
     # Return: JSON String mit der eingefügten ToDo
     def add_todo_to_date(self, json_week, task_name, date):
-        # json_week = json.loads(json_week)
         json_week_first_child = json_week["children"]
         for day in json_week_first_child:
             if day["type"] == "toggle":
@@ -85,8 +84,9 @@ class json_builder:
                     if "children" not in day["toggle"]:
                         day["toggle"]["children"] = []
                     day["toggle"]["children"].append(self.create_new_todo(task_name))
+                    return json.dumps(json_week)
         
-        return json.dumps(json_week)
+        raise DayNotFoundError("Datum nicht in der Woche gefunden!")
 
 
     # string - Kalenderwoche, Startdatum, Enddatum
