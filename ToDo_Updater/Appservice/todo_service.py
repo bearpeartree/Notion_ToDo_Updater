@@ -5,7 +5,6 @@ from Domain import day_factory
 
 class todo_service: # Will be used by API_Client
     def __init__(self):
-        self.todo_service = todo_service
         # in mem storage: dict Key = calendar_week, value = week object
         self.weeks_in_store = {}
 
