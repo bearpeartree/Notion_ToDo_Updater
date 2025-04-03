@@ -30,7 +30,7 @@ class Week:
 
     def get_week_calendar(self):
         first_weekday = self.days["montag"]
-        return first_weekday.date_time.isocalendar()[1]
+        return str(first_weekday.date_time.isocalendar()[1])
     
 
     def get_day(self, day_name):

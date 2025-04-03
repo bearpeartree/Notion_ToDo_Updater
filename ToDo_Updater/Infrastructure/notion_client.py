@@ -1,6 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
+import json
 
 from Infrastructure import json_builder
 from Appservice import todo_service
@@ -36,6 +37,8 @@ class notion_client:
         new_week_resp = requests.patch(f"https://api.notion.com/v1/blocks/{page_id}/children", json=json_week, headers=header)
 
         # zum testen
-        # muss doch die env variablen faken oder?
+        print(json.dumps(new_week_resp.json(), indent=2))
+
+        return new_week_resp
 
     
