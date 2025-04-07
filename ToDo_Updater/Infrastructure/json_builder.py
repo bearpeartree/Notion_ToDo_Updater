@@ -160,3 +160,6 @@ class json_builder:
 
         # return json string
         return json.dumps(new_week)
+    
+if __name__ == "__main__":
+    pass

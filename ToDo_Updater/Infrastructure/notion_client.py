@@ -41,4 +41,5 @@ class notion_client:
 
         return new_week_resp
 
-    
+if __name__ == "__main__":
+    pass
