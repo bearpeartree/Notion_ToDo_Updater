@@ -35,6 +35,7 @@ def main():
     print()
     print("Hier eine Übersicht von verfügbaren Commands:")
     print("==================================================")
+    print("reset == Umgebungsvariablen ändern")
     print("new_week == Neue Woche mit leeren Todos hinzufügen")
     my_command = input()
 
@@ -45,6 +46,12 @@ def main():
     client = notion_client.notion_client(service, j_builder)
 
     match my_command:
+        case "reset":
+            api_key = input("Neue API-Key eingeben: ")
+            page_id = input("Neue Page-Id eingeben: ")
+            with open(dotenv_path, 'w') as f:
+                f.write(f"NOTION_KEY = {api_key}\n")
+                f.write(f"NOTION_PAGE_ID = {page_id}")
         case "new_week":
             day = remove_leading_zeros(input("Tag eingeben (Montag der neuen Woche, als Zahl): ")) # keine führende Nullen 
             month = remove_leading_zeros(input("Monat eingeben als Zahl: ")) # keine führende Nullen, und als Zahl
