@@ -30,7 +30,7 @@ class notion_client:
         new_week = self.todo_service.create_new_week(start_day, month, year)
 
         # jb = create new json week
-        json_week = self.json_builder.build_new_week(new_week.get_week_calendar())
+        json_week = self.json_builder.build_new_week(str(new_week.get_week_calendar()))
 
 
         # send to notion server
