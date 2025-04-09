@@ -21,7 +21,7 @@ class json_builder:
     def __get_random_background_color(self):
         bc_list = [color_member for color_member in color]
         rand_index = randint(0, len(bc_list)-1)
-        return bc_list[rand_index]
+        return bc_list[rand_index].value
 
 
     # string - Wochentag (Montag...), Datum
@@ -157,9 +157,7 @@ class json_builder:
         for day in string_days_of_week:
             new_week["children"].append(self.build_new_day_toggle(day[0], day[1]))
 
-
-        # return json string
-        return json.dumps(new_week)
+        return new_week
     
 if __name__ == "__main__":
     pass

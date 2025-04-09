@@ -86,7 +86,7 @@ def test_new_valid_week(mocker):
         expected_json = json.load(f)
     
 
-    assert tested_json == json.dumps(expected_json)
+    assert json.dumps(tested_json) == json.dumps(expected_json)
 
 
 def test_non_existent_week_creation(mocker):
