@@ -37,7 +37,7 @@ class notion_client:
         new_week_resp = requests.patch(f"https://api.notion.com/v1/blocks/{page_id}/children", json=json_week, headers=header)
 
         # zum testen
-        print(json.dumps(new_week_resp.json(), indent=2))
+        # print(json.dumps(new_week_resp.json(), indent=2))
 
         return new_week_resp
 
