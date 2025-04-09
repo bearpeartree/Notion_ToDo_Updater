@@ -165,179 +165,30 @@ def main():
 #     }
 
 
-#     a_full_new_week = {
-    #     "children": [
-    #         {
-    #         "object": "block",
-	# 		"type": "paragraph",
-	# 		"paragraph": {
-	# 			"rich_text": [
-	# 				{
-	# 					"type": "text",
-	# 					"text": {
-	# 						"content": "Woche 01 / 31.12.24 - 05.01.25",
-    #                         "link": None
-	# 					},
-    #                     "annotations": {
-    #                         "bold": True,
-    #     		            "italic": False,
-    #     		            "strikethrough": False,
-    #     		            "underline": True,
-    #     		            "color": "blue_background"
-    #                     }
-	# 				}
-	# 			]
-	# 		}
-    #         },
-    #         {
-    #             "object": "block",
-    #             "type": "toggle",
-    #             "toggle": {
-    #                 "rich_text": [{
-    #                     "type": "text",
-    #                     "text": {
-    #                         "content": "Montag - 30.12.2024",
-    #                         "link": None
-    #                     },
-    #                      "annotations": {
-    #                         "bold": False,
-    #     		            "italic": False,
-    #     		            "strikethrough": False,
-    #     		            "underline": False,
-    #     		            "color": "default"
-    #                     }
-    #                 }]
-    #             }
-    #         },
-    #         {
-    #             "object": "block",
-    #             "type": "toggle",
-    #             "toggle": {
-    #                 "rich_text": [{
-    #                     "type": "text",
-    #                     "text": {
-    #                         "content": "Dienstag - 31.12.2024",
-    #                         "link": None
-    #                     },
-    #                      "annotations": {
-    #                         "bold": False,
-    #     		            "italic": False,
-    #     		            "strikethrough": False,
-    #     		            "underline": False,
-    #     		            "color": "default"
-    #                     }
-    #                 }]
-    #             }
-    #         },
-    #         {
-    #             "object": "block",
-    #             "type": "toggle",
-    #             "toggle": {
-    #                 "rich_text": [{
-    #                     "type": "text",
-    #                     "text": {
-    #                         "content": "Mittwoch - 01.01.2025",
-    #                         "link": None
-    #                     },
-    #                      "annotations": {
-    #                         "bold": False,
-    #     		            "italic": False,
-    #     		            "strikethrough": False,
-    #     		            "underline": False,
-    #     		            "color": "default"
-    #                     }
-    #                 }]
-    #             }
-    #         },
-    #         {
-    #             "object": "block",
-    #             "type": "toggle",
-    #             "toggle": {
-    #                 "rich_text": [{
-    #                     "type": "text",
-    #                     "text": {
-    #                         "content": "Donnerstag - 02.01.2025",
-    #                         "link": None
-    #                     },
-    #                      "annotations": {
-    #                         "bold": False,
-    #     		            "italic": False,
-    #     		            "strikethrough": False,
-    #     		            "underline": False,
-    #     		            "color": "default"
-    #                     }
-    #                 }]
-    #             }
-    #         },
-    #         {
-    #             "object": "block",
-    #             "type": "toggle",
-    #             "toggle": {
-    #                 "rich_text": [{
-    #                     "type": "text",
-    #                     "text": {
-    #                         "content": "Freitag - 03.01.2025",
-    #                         "link": None
-    #                     },
-    #                      "annotations": {
-    #                         "bold": False,
-    #     		            "italic": False,
-    #     		            "strikethrough": False,
-    #     		            "underline": False,
-    #     		            "color": "default"
-    #                     }
-    #                 }]
-    #             }
-    #         },
-    #         {
-    #             "object": "block",
-    #             "type": "toggle",
-    #             "toggle": {
-    #                 "rich_text": [{
-    #                     "type": "text",
-    #                     "text": {
-    #                         "content": "Samstag - 03.01.2025",
-    #                         "link": None
-    #                     },
-    #                      "annotations": {
-    #                         "bold": False,
-    #     		            "italic": False,
-    #     		            "strikethrough": False,
-    #     		            "underline": False,
-    #     		            "color": "default"
-    #                     }
-    #                 }]
-    #             }
-    #         },
-    #         {
-    #             "object": "block",
-    #             "type": "toggle",
-    #             "toggle": {
-    #                 "rich_text": [{
-    #                     "type": "text",
-    #                     "text": {
-    #                         "content": "Sonntag - 05.01.2025",
-    #                         "link": None
-    #                     },
-    #                      "annotations": {
-    #                         "bold": False,
-    #     		            "italic": False,
-    #     		            "strikethrough": False,
-    #     		            "underline": False,
-    #     		            "color": "default"
-    #                     }
-    #                 }]
-    #             }
-    #         }
-    #     ]
-    # }
-
-
-#     new_header_resp = requests.patch(f"https://api.notion.com/v1/blocks/{page_id}/children", json=a_full_new_week, headers=header)
-#     print_readable_json(new_header_resp)
-
-    todo_block = {
+    a_full_new_week = {
         "children": [
+            {
+            "object": "block",
+			"type": "paragraph",
+			"paragraph": {
+				"rich_text": [
+					{
+						"type": "text",
+						"text": {
+							"content": "Woche 01 / 31.12.24 - 05.01.25",
+                            "link": None
+						},
+                        "annotations": {
+                            "bold": True,
+        		            "italic": False,
+        		            "strikethrough": False,
+        		            "underline": True,
+        		            "color": "blue_background"
+                        }
+					}
+				]
+			}
+            },
             {
                 "object": "block",
                 "type": "toggle",
@@ -354,29 +205,180 @@ def main():
         		            "strikethrough": False,
         		            "underline": False,
         		            "color": "default"
-                        }}],
-                        "children": [{
-                            "object": "block",
-                            "type": "to_do",
-                            "has_children": False,
-                            "to_do": {
-                                "rich_text": [{
-                                    "type": "text",
-                                    "text": {
-                                        "content": "Finish programming",
-                                        "link": None
-                                    }
-                                }]
-                            }
-                        }]
-                    
+                        }
+                    }]
+                }
+            },
+            {
+                "object": "block",
+                "type": "toggle",
+                "toggle": {
+                    "rich_text": [{
+                        "type": "text",
+                        "text": {
+                            "content": "Dienstag - 31.12.2024",
+                            "link": None
+                        },
+                         "annotations": {
+                            "bold": False,
+        		            "italic": False,
+        		            "strikethrough": False,
+        		            "underline": False,
+        		            "color": "default"
+                        }
+                    }]
+                }
+            },
+            {
+                "object": "block",
+                "type": "toggle",
+                "toggle": {
+                    "rich_text": [{
+                        "type": "text",
+                        "text": {
+                            "content": "Mittwoch - 01.01.2025",
+                            "link": None
+                        },
+                         "annotations": {
+                            "bold": False,
+        		            "italic": False,
+        		            "strikethrough": False,
+        		            "underline": False,
+        		            "color": "default"
+                        }
+                    }]
+                }
+            },
+            {
+                "object": "block",
+                "type": "toggle",
+                "toggle": {
+                    "rich_text": [{
+                        "type": "text",
+                        "text": {
+                            "content": "Donnerstag - 02.01.2025",
+                            "link": None
+                        },
+                         "annotations": {
+                            "bold": False,
+        		            "italic": False,
+        		            "strikethrough": False,
+        		            "underline": False,
+        		            "color": "default"
+                        }
+                    }]
+                }
+            },
+            {
+                "object": "block",
+                "type": "toggle",
+                "toggle": {
+                    "rich_text": [{
+                        "type": "text",
+                        "text": {
+                            "content": "Freitag - 03.01.2025",
+                            "link": None
+                        },
+                         "annotations": {
+                            "bold": False,
+        		            "italic": False,
+        		            "strikethrough": False,
+        		            "underline": False,
+        		            "color": "default"
+                        }
+                    }]
+                }
+            },
+            {
+                "object": "block",
+                "type": "toggle",
+                "toggle": {
+                    "rich_text": [{
+                        "type": "text",
+                        "text": {
+                            "content": "Samstag - 03.01.2025",
+                            "link": None
+                        },
+                         "annotations": {
+                            "bold": False,
+        		            "italic": False,
+        		            "strikethrough": False,
+        		            "underline": False,
+        		            "color": "default"
+                        }
+                    }]
+                }
+            },
+            {
+                "object": "block",
+                "type": "toggle",
+                "toggle": {
+                    "rich_text": [{
+                        "type": "text",
+                        "text": {
+                            "content": "Sonntag - 05.01.2025",
+                            "link": None
+                        },
+                         "annotations": {
+                            "bold": False,
+        		            "italic": False,
+        		            "strikethrough": False,
+        		            "underline": False,
+        		            "color": "default"
+                        }
+                    }]
                 }
             }
         ]
     }
+    print(f"==== API KEY: {api_key}")
+    print(f"==== PAGE ID: {page_id}")
 
-    new_todo_resp = requests.patch(f"https://api.notion.com/v1/blocks/{page_id}/children", json=todo_block, headers=header)
-    print_readable_json(new_todo_resp)
+
+    new_header_resp = requests.patch(f"https://api.notion.com/v1/blocks/{page_id}/children", json=a_full_new_week, headers=header)
+    print_readable_json(new_header_resp)
+
+    # todo_block = {
+    #     "children": [
+    #         {
+    #             "object": "block",
+    #             "type": "toggle",
+    #             "toggle": {
+    #                 "rich_text": [{
+    #                     "type": "text",
+    #                     "text": {
+    #                         "content": "Montag - 30.12.2024",
+    #                         "link": None
+    #                     },
+    #                      "annotations": {
+    #                         "bold": False,
+    #     		            "italic": False,
+    #     		            "strikethrough": False,
+    #     		            "underline": False,
+    #     		            "color": "default"
+    #                     }}],
+    #                     "children": [{
+    #                         "object": "block",
+    #                         "type": "to_do",
+    #                         "has_children": False,
+    #                         "to_do": {
+    #                             "rich_text": [{
+    #                                 "type": "text",
+    #                                 "text": {
+    #                                     "content": "Finish programming",
+    #                                     "link": None
+    #                                 }
+    #                             }]
+    #                         }
+    #                     }]
+                    
+    #             }
+    #         }
+    #     ]
+    # }
+
+    # new_todo_resp = requests.patch(f"https://api.notion.com/v1/blocks/{page_id}/children", json=todo_block, headers=header)
+    # print_readable_json(new_todo_resp)
 
 
 def print_readable_json(json_object):
