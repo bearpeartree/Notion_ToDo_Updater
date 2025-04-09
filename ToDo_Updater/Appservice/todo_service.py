@@ -160,3 +160,5 @@ class todo_service: # Will be used by API_Client
         
         return string_dates
 
+if __name__ == "__main__":
+    pass
