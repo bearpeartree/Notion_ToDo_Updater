@@ -7,6 +7,7 @@ from Domain.Day import Day as day
 from Domain.Task import Task as task
 from Domain import Week as week
 from Domain.Exceptions import IllegalDay
+from Domain.Exceptions import DayNotFoundError
 
 
 def test_correct_week_cal():
@@ -26,3 +27,10 @@ def test_add_todo_to_day():
 
     test_day = new_week.get_day("montag")
     assert test_day.get_all_tasks_names() == ["programmieren"]
+
+
+def test_add_noname_task_to_day():
+    new_week = week.Week(3, 2, 2025)
+
+    with pytest.raises(ValueError):
+        new_week.add_todo_to_day("mittwoch", "")
