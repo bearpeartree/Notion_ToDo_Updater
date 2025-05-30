@@ -3,6 +3,8 @@ from .Exceptions import IllegalDay
 from .day_factory import day_factory as df
 import datetime
 
+# WEEK IST AGGREGAT
+
 class Week:
     def __init__(self, day, month, year):
         try:
@@ -47,3 +49,13 @@ class Week:
 
     def get_days(self):
         return self.days
+    
+
+    # ToDo zu einem Tag hinzufügen
+    # Später in service - Kalenderwoche + Wochentag als String
+    def add_todo_to_day(self, day_name, task_name):
+        current_day = self.days[day_name]
+        current_day.add_task(task_name)
+
+
+    # Liste an ToDos eines Tages zurückgeben

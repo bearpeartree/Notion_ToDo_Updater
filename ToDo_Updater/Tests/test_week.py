@@ -18,3 +18,11 @@ def test_get_nonvalid_day():
     new_week = week.Week(7, 10, 2024)
     with pytest.raises(IllegalDay.IllegalDayException):
         new_week.get_day("Hello")
+
+
+def test_add_todo_to_day():
+    new_week = week.Week(5,5, 2025)
+    new_week.add_todo_to_day("montag", "programmieren")
+
+    test_day = new_week.get_day("montag")
+    assert test_day.get_all_tasks_names() == ["programmieren"]
