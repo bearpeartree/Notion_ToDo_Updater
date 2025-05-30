@@ -59,3 +59,11 @@ class Week:
 
 
     # Liste an ToDos eines Tages zurückgeben
+    def get_list_of_tasks_of_day(self, day_name):
+        day = self.days[day_name]
+        return day.get_tasks()
+    
+
+    def get_list_of_tasknames_of_day(self, day_name):
+        day = self.days[day_name]
+        return day.get_all_tasks_names()
