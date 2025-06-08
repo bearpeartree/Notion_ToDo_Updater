@@ -159,6 +159,17 @@ class todo_service: # Will be used by API_Client
             string_dates.append((day.get_week_day().capitalize(), day.format_datetime_to_string()))
         
         return string_dates
+    
+    
+    # Eine SubTask zu einer übergeordnete TODO an einem Tag hinzufügen
+    def add_subtask_to_day(self, date, name_task, name_subtask):
+        # find the correct day
+        current_day = self.get_correct_day(date)
+        # find the correct TODO in that day
+        current_task = current_day.find_correct_task(name_task)
+        # add subtask to  that TODO
+        current_task.add_subtask(name_subtask)
+
 
 if __name__ == "__main__":
     pass

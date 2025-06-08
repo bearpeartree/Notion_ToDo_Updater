@@ -7,6 +7,7 @@ from Appservice import todo_service as ts
 from Domain.Exceptions import IllegalCalendarWeek as icw
 from Domain.day_factory import day_factory
 from Domain.Day import Day
+from Domain.Exceptions.TaskNotFoundError import TaskNotFoundError
 import datetime
 from datetime import date
 
@@ -259,3 +260,26 @@ def test_move_existing_task_to_non_existing_goal_date():
 
     with pytest.raises(KeyError):
         service.move_task_of_today_to_any_other_day("Nachbereitung", "5.12.2024", "12.12.2024")
+
+
+def test_add_subtask_to_existing_task_and_date():
+    service = ts.todo_service()
+
+    service.create_new_week(3, 2, 2025)
+    service.add_task_to_day("Stricken", "5.2.2025")
+
+    service.add_subtask_to_day("5.2.2025", "Stricken","Maschenprobe erstellen")
+
+    tested_day = service.get_correct_day("5.2.2025")
+    tested_task = tested_day.find_correct_task("Stricken")
+    assert tested_task.get_subtasks() == ["Maschenprobe erstellen"]
+
+
+def test_add_subtask_to_non_existing_task():
+    service = ts.todo_service()
+
+    service.create_new_week(3, 2, 2025)
+    service.add_task_to_day("Stricken", "5.2.2025")
+
+    with pytest.raises(TaskNotFoundError):
+        service.add_subtask_to_day("5.2.2025", "Blub","Maschenprobe erstellen")
