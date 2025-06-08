@@ -1,4 +1,5 @@
 from .Task import Task
+from .Exceptions.TaskNotFoundError import TaskNotFoundError
 from datetime import datetime
 
 class Day:
@@ -69,3 +70,11 @@ class Day:
         month = self.date_time.strftime("%m")
         day = self.date_time.strftime("%d")
         return day + "." + month + "." + year
+    
+
+    def find_correct_task(self, task_name):
+        for t in self.tasks:
+            if t.get_task_name() == task_name:
+                return t
+        raise TaskNotFoundError("Die TODO konnte nicht gefunden werden.")
+    
