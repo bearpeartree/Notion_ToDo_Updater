@@ -3,7 +3,6 @@ from .Exceptions import IllegalDay
 from .day_factory import day_factory as df
 import datetime
 
-# WEEK IST AGGREGAT
 
 class Week:
     def __init__(self, day, month, year):

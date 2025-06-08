@@ -22,5 +22,5 @@ class Task:
         self.sub_tasks.append(name_subtask)
 
     # Liste an subtasks zurückgeben
-    def return_subtasks(self):
+    def get_subtasks(self):
         return self.sub_tasks

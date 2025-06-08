@@ -1,0 +1,2 @@
+class TaskNotFoundError(ValueError):
+    pass
