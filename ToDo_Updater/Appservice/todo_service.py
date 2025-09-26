@@ -5,8 +5,6 @@ from Domain import day_factory
 
 class todo_service: # Will be used by API_Client
     def __init__(self):
-        # in mem storage: dict Key = calendar_week, value = week object
-        # self.todo_service = todo_service
         self.weeks_in_store = {}
 
     # expects the date of the new starting week
@@ -16,8 +14,6 @@ class todo_service: # Will be used by API_Client
         return new_week
     
 
-    # Redundant?
-    # Also redundant ist es nicht wirklich... die CLI darf nicht auf die Domaine direkt zugreifen
     def get_stored_weeks(self):
         return self.weeks_in_store
     
@@ -62,16 +58,12 @@ class todo_service: # Will be used by API_Client
          # find correct day in a week
         days_in_current_week = current_week.get_days()
 
-        correct_day = days_in_current_week[conv_current_date.get_week_day()] # brauch den tag
+        correct_day = days_in_current_week[conv_current_date.get_week_day()]
 
         return correct_day
     
 
     # suppose current_date is a string
-    # But do I need to store it somehwere? -> Just for one session is enough! It does not have persist 
-        # I can retrieve that from Notion itself via API (GET)
-        # Then the API Client can look it up under which week the current date falls 
-        # Idea now: Every start: Fetch from Notion, load onto dict
     def add_task_to_day(self, task_name, current_date):
          correct_day = self.get_correct_day(current_date) 
          correct_day.add_task(task_name)
@@ -163,11 +155,8 @@ class todo_service: # Will be used by API_Client
     
     # Eine SubTask zu einer übergeordnete TODO an einem Tag hinzufügen
     def add_subtask_to_day(self, date, name_task, name_subtask):
-        # find the correct day
         current_day = self.get_correct_day(date)
-        # find the correct TODO in that day
         current_task = current_day.find_correct_task(name_task)
-        # add subtask to  that TODO
         current_task.add_subtask(name_subtask)
 
 
