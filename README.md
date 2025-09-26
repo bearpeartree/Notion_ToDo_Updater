@@ -8,6 +8,7 @@
 - While it provides a native form of todo (checkbox), it does not organize your todos. Structuring and
 organizing todos is the user's concern.
 - This means: Before each new semester I had to manually type in week blocks containing empty toggles. Each toggle represents a day of a week. You can add your todos in that toggle. Below there is an example demonstrating it:
+<img width="696" height="669" alt="Image" src="https://github.com/user-attachments/assets/e71ae4b8-ccd4-401c-bd8e-ebbb184a4306" />
 
 
 ## What the program offers
